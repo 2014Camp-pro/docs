@@ -45,6 +45,7 @@
   <script type="text/javascript" src="https://skyway.io/dist/0.3/peer.js"></script>
   <script src="./js/use_peer.js"></script>
   <script src="./js/libs/md5.min.js"></script>
+  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
   <script>
     var map;
     var infowindow;
@@ -73,7 +74,8 @@
     		var lon = position.coords.longitude ;
     		
     		// 近隣のお店を取得
-    		getStoreList(lat,lon);
+    		//getStoreList(lat,lon);
+    		getStoreListByFoursquare(lat,lon);
     	}
 
     	// （2）位置情報の取得に失敗した場合
@@ -101,6 +103,106 @@
     	}
     }
 
+    //
+    function getStoreListByFoursquare(lat,lng) {
+        
+        map = new OpenLayers.Map("map-canvas");
+        map.addLayer(new OpenLayers.Layer.OSM());
+
+        epsg4326 =  new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
+        projectTo = map.getProjectionObject("EPSG:900913"); //The map projection (Spherical Mercator)
+
+        var lonLat = new OpenLayers.LonLat(lng,lat).transform(epsg4326, projectTo); // 東京駅
+        var zoom = 15; // 関東圏全体表示くらい
+        map.setCenter (lonLat, zoom);
+
+        // パラメータ設定
+        var client_id     = "BR0OZX5XXU1GQ5NZHMSKW0T5AWBF5MAIPE2KSYNSFDXPSAM2";
+        var client_secret = "BBS31HXBSZZYWCMAZVB2XMDDZNCOI5ZLGKYLKGP1P25DDZDE";
+        version           = "20140627";
+        intent            = "checkin";
+        //categoryId        = "4d4b7105d754a06374d81259"; // 飲食店
+        limit             = "20";                       // 取得件数(MAX:50)
+        radius            = "400";                      // 指定緯度経度からの距離(m)
+        locale            = "ja";
+    
+        search_url = "https://api.foursquare.com/v2/venues/search";
+        search_url = search_url + "?client_id=" + client_id;
+        search_url = search_url + "&client_secret=" + client_secret;
+        search_url = search_url + "&v=" + version;
+        search_url = search_url + "&radius=" + radius;
+        search_url = search_url + "&intent=" + intent;
+        //search_url = search_url + "&categoryId=" + categoryId;
+        search_url = search_url + "&limit=" + limit;
+        search_url = search_url + "&ll=" + lat + "," + lng; // 緯度経度を指定
+        search_url = search_url + "&locale=" + locale;
+
+        var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
+        var storeListUl = $('#store_list');
+    
+        $.ajax({
+           type: 'GET',
+           url: search_url,
+           dataType : 'json', 
+           success: function(json, status){
+              var len = json.length;
+    
+              venues = json['response']['venues']; 
+              jQuery.each(venues, function(cnt, venue) {
+                
+                 storeListUl.append('<tr><td><a class="table-link">' + venue.name + '</a></td></tr>');
+                 var feature = getPoint(venue.name, venue.location.lat, venue.location.lng);
+                 vectorLayer.addFeatures(feature);
+    
+              });
+           },
+           error: function(XMLHttpRequest, textStatus, errorThrown) {
+             // エラー処理
+           },
+           complete : function(data) {
+             // Ajax通信完了
+           }
+        });
+
+        map.addLayer(vectorLayer);
+
+        //Add a selector control to the vectorLayer with popup functions
+        var controls = {
+          selector: new OpenLayers.Control.SelectFeature(vectorLayer, { onSelect: createPopup, onUnselect: destroyPopup })
+        };
+        function createPopup(feature) {
+            feature.popup = new OpenLayers.Popup("pop",
+                feature.geometry.getBounds().getCenterLonLat(),
+                new OpenLayers.Size(200,50),
+                feature.attributes.description,
+                true,
+                function() { controls['selector'].unselectAll(); }
+            );
+            //feature.popup.closeOnMove = true;
+            map.addPopup(feature.popup);
+          }
+
+          function destroyPopup(feature) {
+            feature.popup.destroy();
+            feature.popup = null;
+          }
+          map.addControl(controls['selector']);
+          controls['selector'].activate();
+          getCell();
+
+          function getPoint(name, lat, lng) {
+              var feature = new OpenLayers.Feature.Vector(
+                      new OpenLayers.Geometry.Point(lng,lat).transform(epsg4326, projectTo),
+                      {description:'<div class="map-infowindow">'+
+                      '<h4>'+name+'</h4>'},
+                      {externalGraphic: 'img/pin.png', graphicHeight: 25, graphicWidth: 25, graphicXOffset:-15, graphicYOffset:-25  }
+                  );
+              return feature;
+          }
+    }
+    
+    
+    
  // 現在地の緯度経度をもとに近隣の店リストを取得
  function getStoreList(lat,lng) {
 
@@ -122,6 +224,7 @@
  	
  	function callback(results, status) {
  		var storeListUl = $('#store_list');
+ 		
  		if (status == google.maps.places.PlacesServiceStatus.OK) {
  			var storeList2 = results;
  			storeList = storeList2;
@@ -145,6 +248,18 @@
  		infowindow.setContent(place.name);
  		infowindow.open(map, this);
  	});
+ }
+
+ function createMarkerByFoursquare(name, lat, lng) {
+    var marker = new google.maps.Marker({
+        map: map,
+        position: new  google.maps.LatLng(lat,lng)
+    });
+    
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(name);
+        infowindow.open(map, this);
+    });
  }
 
  // クリックされたセルを取得できるようにしておく

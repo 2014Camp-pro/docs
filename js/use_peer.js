@@ -102,7 +102,7 @@ function connect(c) {
 			var userObj = JSON.parse(localStorage.getItem(c.metadata.userId));
 			if(!userObj){
 				var myUserData = window.localStorage.getItem('user_' + meObj.user_id);
-				sendMyData(c.peer,CHECKIN,meObj.userId,myUserData);
+				sendMyData(c.peer,CHECKIN,meObj.user_id,myUserData);
 			}else{
 				localStorage.removeItem(c.metadata.userId);
 			}

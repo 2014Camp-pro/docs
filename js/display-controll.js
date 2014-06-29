@@ -10,6 +10,25 @@ function isCheckedIn() {
 function checkOut() {
     meData = JSON.parse(window.localStorage.getItem('me'));
     window.localStorage.setItem('me',JSON.stringify({"user_id":meData.user_id,"store_id":""}));
+    
+    for(var i = 0; i < window.localStorage.length; i++){
+        // キー名の取得 
+        var k = window.localStorage.key(i);
+        // userデータ削除
+        if (k.indexOf('user_') !== -1) {
+            if (window.localStorage.getItem(k) != me.user_id) {
+                // 自分以外削除
+                localStorage.removeItem(k);
+                continue;
+            }
+        }
+        // チャットデータ削除
+        if (k.indexOf('chat_') !== -1) {
+            localStorage.removeItem(k);
+            continue;
+        } 
+    }
+    
     location.href='checkout.html';
     return false;
 }

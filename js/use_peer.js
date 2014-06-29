@@ -125,6 +125,7 @@ function connect(c) {
 	}
 	else if (c.label === CHAT) {
 		if(c.metadata === meObj.store_id){
+			// すでに接続ができている場合、新たに作成しない
 			if(chatConnectArray[c.peer] === 1){
 				c.close();
 			}else{
@@ -157,6 +158,7 @@ function connect(c) {
 			  	});
 			}
 		}else{
+			// 別の行列のユーザからの接続要求のため拒否
 			c.close();
 		}
 	}

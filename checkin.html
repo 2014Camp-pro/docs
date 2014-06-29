@@ -147,7 +147,9 @@
            success: function(json, status){
               var len = json.length;
     
-              venues = json['response']['venues']; 
+              venues = json['response']['venues'];
+              //var storeList2 = results;
+ 	      storeList = venues;
               jQuery.each(venues, function(cnt, venue) {
                 
                  storeListUl.append('<tr><td><a class="table-link">' + venue.name + '</a></td></tr>');

@@ -63,11 +63,17 @@
   			for(var index in chatArray){
   				var chatObj = JSON.parse(localStorage.getItem('chat_' + chatArray[index]));
   				if(chatObj !== null){
-  					// てきとーに表示、時系列並び替え必要かも
+  					// 現在localStorage内のチャットデータを出力
   					var userObj = JSON.parse(localStorage.getItem('user_' + chatObj.user_id));
+  					
+  					// ユーザデータをもっていなかった場合の処理
+  					// 未実装
+  					
   					if(userObj.photo === null){
   						userObj.photo = "img/noimage.png";
   					}
+  					
+  					// 現在並んでいるstore_idと等しいもののみ表示
   					if(chatObj.store_id === meObj.store_id){
 						   if(chatObj.user_id == meObj.user_id){
 						   $('#chat-space').append('<li class="field chat me">' +
@@ -127,6 +133,7 @@
  		}
   	}
   	
+  	// 現在接続している全てのユーザにデータを送信する処理
   	function connectedAllPeer(msg){
   		for(var targetId in chatConnectArray){
   			var conns = peer.connections[targetId];
@@ -151,9 +158,11 @@
   		$('#send').submit(function(e) {
   			//　これがないとリロードがかかる
   			e.preventDefault();
+  			
   			// For each active connection, send the message.
   			var nowTime = new Date();
-  			// 日時を数値化
+  			
+  			// 日時を指定の形式に変更
   			var strTime = nowTime.getFullYear() + '-' +
   				      (nowTime.getMonth() + 1) + '-' +
   				      nowTime.getDate() + " " +

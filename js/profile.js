@@ -68,6 +68,7 @@
         	window.localStorage.setItem(user_id, JSON.stringify(user));
     	}else{
     		window.alert(error);
+    		return false;
     	}
     	
     	
@@ -186,7 +187,7 @@
     	}
     	else{
     		window.alert(error);
-    		location.href = "http://2014camp-pro.github.io/docs/edit_profile.html";
+    		return false;
     	}
     }
 function getShowProfile(){

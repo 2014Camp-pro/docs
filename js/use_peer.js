@@ -125,33 +125,37 @@ function connect(c) {
 	}
 	else if (c.label === CHAT) {
 		if(c.metadata === meObj.store_id){
-	 	  	chatConnectArray[c.peer] = 1;
-		  	c.on('data', function(data) {
-		  		var getMsgObj = JSON.parse(data);
-		  		var userObj = JSON.parse(localStorage.getItem('user_' + getMsgObj.user_id));
-		  		
-		  	      	$('#chat-space')
-		  	        .append('<li class="field chat"><div class="user">' + 
-		        	'<a href="show_profile.html" class="photo"><img src=' + userObj.photo + '></a>' +
-		        	'<a href="show_profile.html" class="name">' + userObj.name + '</a>'  +
-		        	'</div>' +
-		        	'<p class="msg">' +
-		        	'<time>' + getMsgObj.date + '</time>' +
-		        	getMsgObj.msg +
-		        	'</p></li>');
-		        	
-		        	// チャットを追加する
-		  		addchat(data);
-		  	});
-		
-		  	c.on('close', function() {
-		  		// 接続が切断されたことを検知
-	 			console.log(c.peer + ' has left. : label:chat');
-	 			if ($('.connection').length === 0) {
-	 				console.log(c.peer + ' no connection');
-	 			}
-		  		delete chatConnectArray[c.peer];
-		  	});
+			if(chatConnectArray[c.peer] === 1){
+				c.close();
+			}else{
+		 	  	chatConnectArray[c.peer] = 1;
+			  	c.on('data', function(data) {
+			  		var getMsgObj = JSON.parse(data);
+			  		var userObj = JSON.parse(localStorage.getItem('user_' + getMsgObj.user_id));
+			  		
+			  	      	$('#chat-space')
+			  	        .append('<li class="field chat"><div class="user">' + 
+			        	'<a href="show_profile.html" class="photo"><img src=' + userObj.photo + '></a>' +
+			        	'<a href="show_profile.html" class="name">' + userObj.name + '</a>'  +
+			        	'</div>' +
+			        	'<p class="msg">' +
+			        	'<time>' + getMsgObj.date + '</time>' +
+			        	getMsgObj.msg +
+			        	'</p></li>');
+			        	
+			        	// チャットを追加する
+			  		addchat(data);
+			  	});
+			
+			  	c.on('close', function() {
+			  		// 接続が切断されたことを検知
+		 			console.log(c.peer + ' has left. : label:chat');
+		 			if ($('.connection').length === 0) {
+		 				console.log(c.peer + ' no connection');
+		 			}
+			  		delete chatConnectArray[c.peer];
+			  	});
+			}
 		}else{
 			c.close();
 		}

@@ -293,8 +293,8 @@
 
  function setLocalStrageData(checkinStore) {
  	// storeIdを取得（少数点以下は4桁）
- 	var storeLatArr = checkinStore.geometry.location.lat().toFixed(4).split('.');		// 緯度
- 	var storeLngArr = checkinStore.geometry.location.lng().toFixed(4).split('.');	//経度
+ 	var storeLatArr = venue.location.lat.toFixed(4).split('.');		// 緯度
+ 	var storeLngArr = venue.location.lng.toFixed(4).split('.');	//経度
  	var storeStorageKey = 'store_' + storeLngArr[0] + '-' + storeLngArr[1] + '_' + storeLatArr[0] + '-' + storeLatArr[1];
  	
  	// 1桁の数字を0埋めで2桁にする

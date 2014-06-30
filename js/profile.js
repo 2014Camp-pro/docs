@@ -212,7 +212,8 @@ function getShowProfile(){
         var matrix = user_info.matrix_log_ids;
         var matrix_log_ids = matrix.split(","); 
         for(var i=0; i>matrix_log_ids.length; i++){
-        	console.log(matrix_log_ids[i]);
+        	var mat = matrix_log_ids[i];
+        	console.log(mat);
         	var matrix_logs = "";
         	        	console.log(matrix_log_ids[i]);
         	        	

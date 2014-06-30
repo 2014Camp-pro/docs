@@ -211,12 +211,11 @@ function getShowProfile(){
         var old_matrix = "";
         var matrix = user_info.matrix_log_ids;
         var matrix_log_ids = matrix.split(","); 
-        console.log(matrix_log_ids[0]);
-
         for(var i=0; i>matrix_log_ids.length; i++){
         	console.log(matrix_log_ids[i]);
         	var matrix_logs = "";
         	        	console.log(matrix_log_ids[i]);
+        	        	
         	matrix_logs = JSON.parse(window.localStorage.getItem(matrix_log_ids[i]));
         	old_matrix = "<p class='storename'>"+matrix_logs.name+"</p>"; 
         }

@@ -168,8 +168,8 @@
     	}
 		
     	// 写真を取得
-		var photo = document.getElementById("photo").src;
-		console.log(photo);
+    	var file = "";
+	file = document.profile.photo.value;
     	
     	// コメント取得
     	var comment = document.profile.comment.value;
@@ -182,7 +182,7 @@
         	var user = {"name":name, "sex":sex, "state":state, "age":age, "comment":comment, 
         			"matrix_log_ids":user_info.matrix_log_ids,"store_id":user_info.store_id,
         			"store_name":user_info.store_name,"store_lat":user_info.store_lat,
-        			"store_lng":user_info.store_lng,"chat_ids":user_info.chat_ids, "photo":photo};
+        			"store_lng":user_info.store_lng,"chat_ids":user_info.chat_ids, "photo":file};
 
         	window.localStorage.setItem(id, JSON.stringify(user));
     	}

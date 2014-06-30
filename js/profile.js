@@ -172,7 +172,7 @@
 	file = document.getElementById("photo").src;
 	console.log("aaaa");
 	console.log(file);
-    	
+    	return false;
     	// コメント取得
     	var comment = document.profile.comment.value;
     	

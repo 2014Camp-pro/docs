@@ -211,7 +211,7 @@ function getShowProfile(){
         var old_matrix = "";
         var matrix = user_info.matrix_log_ids;
         console.log(matrix);
-        var matrix_log_ids = matrix.split(","); 
+        var matrix_log_ids = matrix.split(','); 
 
         for(i=0;i>matrix_log_ids.length;i++){
         	var matrix_logs = "";

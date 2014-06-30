@@ -170,9 +170,6 @@
     	// 写真を取得
     	var file = "";
 	file = document.getElementById("photo").src;
-	console.log("aaaa");
-	console.log(file);
-    	return false;
     	// コメント取得
     	var comment = document.profile.comment.value;
     	
@@ -186,7 +183,7 @@
         			"store_name":user_info.store_name,"store_lat":user_info.store_lat,
         			"store_lng":user_info.store_lng,"chat_ids":user_info.chat_ids, "photo":file};
 
-        	window.localStorage.setItem(id, JSON.stringify(user));
+        	window.localStorage.setItem(user_id, JSON.stringify(user));
     	}
     	else{
     		window.alert(error);

@@ -210,8 +210,9 @@ function getShowProfile(){
         store_data = "<h4 class='storetype'>現在並んでいるお店</h4><p class='storename'>"+user_info.store_name+"</p><h4 class='storetype'>過去に並んだお店</h4>";
         var old_matrix = "";
         var matrix = user_info.matrix_log_ids;
-        var matrix_log_ids = matrix.split(","); 
-        for(var i=0; i < matrix_log_ids.length; i++){
+        var matrix_log_ids = matrix.split(",");
+        var length = matrix_log_ids.length - 1;
+        for(var i=0; i < length; i++){
         	var matrix_logs = "";
         	matrix_logs = JSON.parse(window.localStorage.getItem(matrix_log_ids[i]));
         	old_matrix = old_matrix+"<p class='storename'>"+matrix_logs.name+"</p>"; 

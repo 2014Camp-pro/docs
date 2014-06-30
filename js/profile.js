@@ -214,7 +214,7 @@ function getShowProfile(){
         for(var i=0; i < matrix_log_ids.length; i++){
         	var matrix_logs = "";
         	matrix_logs = JSON.parse(window.localStorage.getItem(matrix_log_ids[i]));
-        	old_matrix = old_matrix+"<p class='storename'>"+matrix_logs.name+"</p><br>"; 
+        	old_matrix = old_matrix+"<p class='storename'>"+matrix_logs.name+"</p>"; 
         }
         store_data = store_data+old_matrix;
         document.getElementById("store_profile").innerHTML= store_data;

@@ -169,7 +169,9 @@
 		
     	// 写真を取得
     	var file = "";
-	file = document.profile.photo.value;
+	file = document.getElementById("photo").src;
+	console.log("aaaa");
+	console.log(file);
     	
     	// コメント取得
     	var comment = document.profile.comment.value;

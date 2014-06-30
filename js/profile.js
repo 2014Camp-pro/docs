@@ -212,13 +212,9 @@ function getShowProfile(){
         var matrix = user_info.matrix_log_ids;
         var matrix_log_ids = matrix.split(","); 
         for(var i=0; i < matrix_log_ids.length; i++){
-        	var mat = matrix_log_ids[i];
-        	console.log(mat);
         	var matrix_logs = "";
-        	        	console.log(matrix_log_ids[i]);
-        	        	
         	matrix_logs = JSON.parse(window.localStorage.getItem(matrix_log_ids[i]));
-        	old_matrix = "<p class='storename'>"+matrix_logs.name+"</p>"; 
+        	old_matrix = old_matrix+"<p class='storename'>"+matrix_logs.name+"</p><br>"; 
         }
         store_data = store_data+old_matrix;
         document.getElementById("store_profile").innerHTML= store_data;

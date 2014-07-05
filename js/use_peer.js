@@ -137,7 +137,7 @@ function connect(c) {
 			  	      	$('#chat-space')
 			  	        .append('<li class="field chat"><div class="user">' + 
 			        	'<a href="show_profile.html" class="photo"><img src=' + userObj.photo + '></a>' +
-			        	'<a href="show_profile.html" class="name">' + userObj.name + '</a>'  +
+			        	'<span class="name">' + userObj.name + '</span>'  +
 			        	'</div>' +
 			        	'<p class="msg">' +
 			        	'<time>' + getMsgObj.date + '</time>' +

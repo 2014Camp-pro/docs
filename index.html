@@ -83,6 +83,87 @@
   <div class="wrapper wrapper-top">
   <div class="row">
 
+  <!--{チュートリアルModal ここから}-->
+  <div class="modal" id="modal-tutorial">
+    <div class="content">
+      <a class="close switch" gumby-trigger="|#modal-tutorial"><i class="icon-cancel" /></i></a>
+      <div class="row">
+        <div class="ten columns centered text-center">
+          <div class="drawer active" id="drawer1">
+            <h3 class="tutorial-header">Welcome!!</h3>
+            <p class="tutorial-text">
+              現在、日本にはいたるところに行列ができています。あなたはいつもどんな行列に並びますか？
+              おいしいパンケーキ？ポップコーン？かわいい雑貨店？<br />
+              「一番前の人は何時から並んでるのかな？」「みんなはどの種類を買うんだろう？」
+              そんな風に考えたとき、もしかしたら前の人も後ろの人も、同じことを考えているかも。
+              どんな行列でも、同じものを楽しみに並んでいる人が集まっているのです。
+              そう思うとワクワクしませんか？<br />
+              さあ、行列をもっと楽しむ、新しい体験をはじめましょう！
+            </p>
+            <p class="btn medium primary">
+              <a href="#" class="toggle" gumby-trigger="#drawer1|#drawer2">NEXT</a>
+            </p>
+          </div>
+          <div class="drawer" id="drawer2">
+            <h3 class="tutorial-header">行列を楽しむ3STEP</h3>
+            <h5 class="tutorial-sub-header">1. 行列へチェックイン</h5>
+            <p class="tutorial-text">
+              「チェックイン」ボタンからチェックイン画面へ進みます。<br />
+              周辺のお店リストから、あなたが並んでいるお店を選択して行列へチェックインしましょう。
+            </p>
+            <p class="btn medium primary">
+              <a href="#" class="toggle" gumby-trigger="#drawer1|#drawer2">PREV</a>
+            </p>
+            <p class="btn medium primary">
+              <a href="#" class="toggle" gumby-trigger="#drawer2|#drawer3">NEXT</a>
+            </p>
+          </div>
+          <div class="drawer" id="drawer3">
+            <h3 class="tutorial-header">行列を楽しむ3STEP</h3>
+            <h5 class="tutorial-sub-header">2. 同じ行列の人と情報交換</h5>
+            <p class="tutorial-text">
+              行列にチェックインすると、同じ列に並んでいる人とチャットができます。<br />
+              待ち時間や商品の情報交換、買ったものを報告したりしましょう。時間を持て余したときは「しりとり」で遊ぶこともできます。
+            </p>
+            <p class="btn medium primary">
+              <a href="#" class="toggle" gumby-trigger="#drawer2|#drawer3">PREV</a>
+            </p>
+            <p class="btn medium primary">
+              <a href="#" class="toggle" gumby-trigger="#drawer3|#drawer4">NEXT</a>
+            </p>
+          </div>
+          <div class="drawer" id="drawer4">
+            <h3 class="tutorial-header">行列を楽しむ3STEP</h3>
+            <h5 class="tutorial-sub-header">3. 全国の行列情報をチェック!</h5>
+            <p class="tutorial-text">
+              あなたが並んでいる行列以外に、どこに行列ができているか気になりませんか？<br />
+              行列マップでは、全国にできている行列、並んでいる人数が一目で分かります。<br />
+              よくチェックインされるお店や、行列が好きな県民ランキングも見てみるとワクワクしますね。
+            </p>
+            <p class="btn medium primary">
+              <a href="#" class="toggle" gumby-trigger="#drawer3|#drawer4">PREV</a>
+            </p>
+            <p class="btn medium primary">
+              <a href="#" class="toggle" gumby-trigger="#drawer4|#drawer5">NEXT</a>
+            </p>
+          </div>
+          <div class="drawer" id="drawer5">
+            <h3 class="tutorial-header">Let's Enjoy!!</h3>
+            <h5 class="tutorial-sub-header">さっそく始めましょう！</h5>
+            <p class="tutorial-text">
+              このチュートリアルは、トップページからいつでも見ることができます。<br />
+              さあ、もっともっと行列を楽しもう！<br />
+              ようこそ、Flashmob型SNS 「列's Enjoy!!」へ！
+            </p>
+            <p class="btn metro rounded large success btn-widthmax">
+              <a href="#" class="close switch" gumby-trigger="|#modal-tutorial">START!!</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--{チュートリアルModal ここまで}-->
 
 
 
@@ -99,6 +180,9 @@
       <div class="twelve columns">
         <div class="large metro rounded primary btn btn-widthmax"><a href="map.html"><i class="icon-globe"></i> MAPをみる</a></div>
       </div>
+      <div class="twelve columns">
+          <a href="#" id="open-tutorial"><i class="icon-help-circled"></i> チュートリアルを開く</a></div>
+      </div>
     </div>
   <!--{コンテンツ ここまで}-->
 
@@ -106,8 +190,6 @@
 
 
 
-  </div>
-  <div class="footer-fix"></div>
   </div>
   <!--{共通フッター ここから}-->
   <footer class="row footer fixed">

@@ -14,3 +14,14 @@ if((myFileName == "index.html" || myFileName == "") && isCheckin) {
 } else {
     $("#top-menu-checkout").css('display','none');
 }
+
+// TOPページのチュートリアル表示
+if((myFileName == "index.html" || myFileName == "") && !isCheckin && isFirstVisit) {
+    $("#modal-tutorial").addClass("active");
+}
+// フッターのチュートリアル表示クリック
+$('#open-tutorial').click(function(){
+    $('#drawer5').removeClass('active');
+    $('#drawer1').addClass('active');
+    $("#modal-tutorial").addClass("active");
+});

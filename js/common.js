@@ -23,6 +23,11 @@ function isCheckedIn() {
     }
     return false;
 }
+// 初回利用状態かチェック
+function isFirstVisit() {
+    return meData == null || meData == '';
+}
+
 // チェックアウトさせる
 function checkOut() {
     window.localStorage.setItem('me',JSON.stringify({"user_id":meData.user_id,"store_id":""}));
@@ -68,6 +73,8 @@ function redirectNewProfilePage() {
 //---------------- 画面表示前のチェック処理 ---------------- //
 // チェックインフラグを取得
 var isCheckin = isCheckedIn();
+// 初回利用者フラグ
+var isFirstVisit = isFirstVisit();
 
 // 表示中画面名を取得
 var myPathName = location.pathname;
@@ -82,6 +89,6 @@ if(isCheckin && myFileName == "checkin.html") {
     redirectChatPage();
 }
 // チェックイン時、プロフィールデータがなければプロフィール登録画面へ
-if (isCheckin && meData == "" && $.inArray(myFileName, needUserDataPageList) != -1) {
+if (isCheckin && isFirstVisit && $.inArray(myFileName, needUserDataPageList) != -1) {
     redirectNewProfilePage();
 }
